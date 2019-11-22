@@ -30,7 +30,7 @@ function getName(character) {
  */
 function getFilmCount(character) {
   // TODO: Add your code inside the functions (others below).
-
+  return character.films.length;
 }
 
 /**
@@ -43,6 +43,8 @@ function getFilmCount(character) {
 */
 function getSecondStarshipName(character) {
   // TODO: Add your code here.
+  if(character.starships.length < 1) return 'none';
+  return character.starships[1].name;
 }
 
 /**
@@ -56,6 +58,7 @@ function getSecondStarshipName(character) {
  */
 function getSummary(character) {
   // TODO: Add your code here.
+  return `${character.name}, ${character.height}cm, ${character.mass}kg. Featured in ${character.films.length} films.`;
 }
 
 /**
@@ -68,6 +71,7 @@ function getSummary(character) {
 */
 function getVehiclesCostInCreditsSumTotal(character) {
   // TODO: Add your code here.
+  return character.vehicles.reduce((acc, v) => acc + v.cost_in_credits, 0);
 }
 
 /**
@@ -82,6 +86,7 @@ function getVehiclesCostInCreditsSumTotal(character) {
 */
 function getStarshipPassengerAndCrewSumTotal(character) {
   // TODO: Add your code here.
+  return character.starships.reduce((acc, s) => acc + s.crew + s.passengers, 0);
 }
 
 /**
@@ -99,6 +104,7 @@ function getStarshipPassengerAndCrewSumTotal(character) {
 */
 function getNthFilm(character, filmNumber) {
   // TODO: Add your code here.
+  return character.films[filmNumber - 1];
 }
 
 /**
@@ -113,6 +119,7 @@ function getNthFilm(character, filmNumber) {
 */
 function getCargoCapacityTotal(character) {
   // TODO: Add your code here.
+  return character.vehicles.reduce((acc, v) => acc + +v.cargo_capacity, 0) + character.starships.reduce((acc, s) => acc + +s.cargo_capacity, 0);
 }
 
 /**
@@ -128,6 +135,8 @@ function getCargoCapacityTotal(character) {
 */
 function getFastestStarshipName(character) {
   // TODO: Add your code here.
+  if(character.starships.length < 1) return 'none';
+  return character.starships.reduce((acc, s) => +acc.max_atmosphering_speed < +s.max_atmosphering_speed ? s : acc).name;
 }
 
 /**
@@ -143,6 +152,8 @@ function getFastestStarshipName(character) {
 */
 function getLargestCargoStarshipModelName(character) {
   // TODO: Add your code here.
+  if(character.starships.length < 1) return 'none';
+  return character.starships.reduce((acc, s) => +acc.cargo_capacity < +s.cargo_capacity ? s : acc).model;
 }
 
 /**
@@ -157,6 +168,8 @@ function getLargestCargoStarshipModelName(character) {
 */
 function getSlowestVehicleOrStarshipName(character) {
   // TODO: Add your code here.
+  if(character.starships.length + character.vehicles.length < 1) return 'none';
+  return [...character.starships, ...character.vehicles].reduce((acc, s) => +acc.max_atmosphering_speed < +s.max_atmosphering_speed ? acc : s).name;
 }
 
 
